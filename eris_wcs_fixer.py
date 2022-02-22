@@ -18,7 +18,7 @@ out = args.out
 inplace = args.inplace
 
 SETUPS = {"SPIFFIER" : {
-            "250mas" : {"PA" : 65.34, "crpix1" : 41.68, "crpix2" : 19.06, "sign" : 1, "pxscl" : 125, "raoff" : -1.3569e-4, "decoff" : 6.22951e-05}
+            "250mas" : {"PA" : 68.16, "crpix1" : 41.68, "crpix2" : 19.06, "sign" : 1, "pxscl" : 125, "raoff" : -1.6366e-4, "decoff" : 1.7033e-4}
             },
          "NIX" : {
             "13mas-JHK" : {"PA" : -63.17, "crpix1" : 1064.9, "crpix2" : 1099.1, "sign" : 1, "pxscl" : 13, "raoff" : -2.73765e-4, "decoff" : 1.812239e-4},
