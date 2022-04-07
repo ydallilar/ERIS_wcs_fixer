@@ -18,6 +18,7 @@ out = args.out
 inplace = args.inplace
 
 SETUPS = {"SPIFFIER" : {
+            #"250mas" : {"PA" : 68.54, "crpix1" : 64-39.86, "crpix2" : 64-19.08, "sign" : -1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
             "250mas" : {"PA" : 68.54, "crpix1" : 39.86, "crpix2" : 19.08, "sign" : 1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
             },
          "NIX" : {
@@ -66,6 +67,13 @@ def update_wcs(path, f_name, out=None):
     head.set("CD2_1", cd[1][0])
     head.set("CD2_2", cd[1][1])
 
+    inv = np.linalg.inv(cd)
+    cumoffsky = np.array([head.get("ESO OCS CUMOFFS RA"), head.get("ESO OCS CUMOFFS DEC")])/60./60.
+    cumoffpix = np.matmul(inv, cumoffsky)
+
+    head.set("CUM X", cumoffpix[0])
+    head.set("CUM Y", cumoffpix[1])
+
     if inplace:
         fits.PrimaryHDU(data, header=head).writeto("%s/%s" % (path, f_name), overwrite=True)
     else:
@@ -76,5 +84,6 @@ def update_wcs(path, f_name, out=None):
 
 if __name__=="__main__":
 
+    print(f_name)
     update_wcs(path, f_name, out=out)
 
