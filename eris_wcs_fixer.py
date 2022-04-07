@@ -38,11 +38,11 @@ def get_config(path, f_name):
     else:
         raise ValueError("%s not a valid instrument" % INS)
 
-    return config
+    return INS, config
 
 def update_wcs(path, f_name, out=None):
 
-    config = get_config(path, f_name)
+    INS, config = get_config(path, f_name)
 
     head = fits.getheader("%s/%s" % (path, f_name))
     data = fits.getdata("%s/%s" % (path, f_name))
@@ -67,12 +67,13 @@ def update_wcs(path, f_name, out=None):
     head.set("CD2_1", cd[1][0])
     head.set("CD2_2", cd[1][1])
 
-    inv = np.linalg.inv(cd)
-    cumoffsky = np.array([head.get("ESO OCS CUMOFFS RA"), head.get("ESO OCS CUMOFFS DEC")])/60./60.
-    cumoffpix = np.matmul(inv, cumoffsky)
+    if INS == "SPIFFIER": # can only do for SPIFFIER
+        inv = np.linalg.inv(cd)
+        cumoffsky = np.array([head.get("ESO OCS CUMOFFS RA"), head.get("ESO OCS CUMOFFS DEC")])/60./60.
+        cumoffpix = np.matmul(inv, cumoffsky)
 
-    head.set("CUM X", cumoffpix[0])
-    head.set("CUM Y", cumoffpix[1])
+        head.set("CUM X", cumoffpix[0])
+        head.set("CUM Y", cumoffpix[1])
 
     if inplace:
         fits.PrimaryHDU(data, header=head).writeto("%s/%s" % (path, f_name), overwrite=True)
