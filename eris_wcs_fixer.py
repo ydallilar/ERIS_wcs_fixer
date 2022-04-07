@@ -18,8 +18,8 @@ out = args.out
 inplace = args.inplace
 
 SETUPS = {"SPIFFIER" : {
-            #"250mas" : {"PA" : 68.54, "crpix1" : 64-39.86, "crpix2" : 19.08, "sign" : -1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
-            "250mas" : {"PA" : 68.54, "crpix1" : 39.86, "crpix2" : 19.08, "sign" : 1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
+            "250mas" : {"PA" : 68.54, "crpix1" : 64-39.86, "crpix2" : 19.08, "sign" : -1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
+            #"250mas" : {"PA" : 68.54, "crpix1" : 39.86, "crpix2" : 19.08, "sign" : 1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
             },
          "NIX" : {
             "13mas-JHK" : {"PA" : -63.17, "crpix1" : 1064.9, "crpix2" : 1099.1, "sign" : 1, "pxscl" : 13, "raoff" : -2.73765e-4, "decoff" : 1.812239e-4},
@@ -70,7 +70,7 @@ def update_wcs(path, f_name, out=None):
     if INS == "SPIFFIER": # can only do for SPIFFIER
         inv = np.linalg.inv(cd)
         cumoffsky = np.array([head.get("ESO OCS CUMOFFS RA"), head.get("ESO OCS CUMOFFS DEC")])/60./60.
-        cumoffpix = np.matmul(inv, cumoffsky)
+        cumoffpix = -np.matmul(inv, cumoffsky)
 
         head.set("CUM X", cumoffpix[0])
         head.set("CUM Y", cumoffpix[1])
