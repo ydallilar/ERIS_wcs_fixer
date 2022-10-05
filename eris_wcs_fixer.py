@@ -59,8 +59,8 @@ def update_wcs(path, f_name, out=None):
 
     posang = (config["PA"]+head["ESO ADA POSANG"])*np.pi/180.
 
-    head.set("CTYPE1", "RA--TAN")
-    head.set("CTYPE2", "DEC-TAN")
+    head.set("CTYPE1", "RA---TAN")
+    head.set("CTYPE2", "DEC--TAN")
     head.set("CRPIX1", config["crpix1"])
     head.set("CRPIX2", config["crpix2"])
     head.set("CRVAL1", head["RA"]+config["raoff"])
