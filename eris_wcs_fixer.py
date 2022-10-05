@@ -17,6 +17,7 @@ path = args.path
 out = args.out
 inplace = args.inplace
 
+"""
 SETUPS = {"SPIFFIER" : {
             "250mas" : {"PA" : 68.54, "crpix1" : 64-39.86, "crpix2" : 19.08, "sign" : -1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
             #"250mas" : {"PA" : 68.54, "crpix1" : 39.86, "crpix2" : 19.08, "sign" : 1, "pxscl" : 125, "raoff" : -2.0392e-4, "decoff" : 1.3612e-4}
@@ -25,6 +26,15 @@ SETUPS = {"SPIFFIER" : {
             "13mas-JHK" : {"PA" : -63.17, "crpix1" : 1064.9, "crpix2" : 1099.1, "sign" : 1, "pxscl" : 13, "raoff" : -2.73765e-4, "decoff" : 1.812239e-4},
             "27mas-JHK" : {"PA" : -65.02, "crpix1" : 958.0, "crpix2": 1065.9, "sign" : -1, "pxscl" : 27, "raoff" : -2.4458e-4, "decoff" : 1.3427e-4}
             }
+         }
+"""
+
+SETUPS = {
+         "NIX" : {
+            "13mas-JHK" : {"PA" : -0.4, "crpix1" : 1064.9, "crpix2" : 1099.1, "sign" : 1, "pxscl" : 13.09, "raoff" : 0, "decoff" : 0},
+            "27mas-JHK" : {"PA" : 1.55, "crpix1" : 958.0, "crpix2": 1065.9, "sign" : -1, "pxscl" : 26.92, "raoff" : 0, "decoff" : 0},
+            "13mas-LM" : {"PA" : -0.4, "crpix1" : 1064.9, "crpix2" : 1099.1, "sign" : 1, "pxscl" : 13.03, "raoff" : 0, "decoff" : 0}
+            },
          }
 
 def get_config(path, f_name):
